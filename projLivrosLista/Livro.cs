@@ -16,8 +16,12 @@ namespace projLivrosLista
         private string editora;
         private List<Exemplar> exemplares;
         #endregion
-                
+
         #region propriedades
+        public List<Exemplar> Exemplares
+        {
+            get { return exemplares; }
+        }
         public int Isbn
         {
             get { return isbn; }
@@ -48,10 +52,12 @@ namespace projLivrosLista
             this.titulo = titulo;
             this.editora = editora;
             this.autor = autor;
+            this.exemplares = new List<Exemplar>();
         }
         public Livro(int isbn)
         {
             this.isbn = isbn;
+            this.exemplares = new List<Exemplar>();
         }
         public Livro()
             : this(0, "", "","")
@@ -66,19 +72,32 @@ namespace projLivrosLista
         }
         public int qtdeExemplares()
         {
-            return 0;
+            return this.exemplares.Count();
         }
         public int qtdeDisponiveis()
         {
-            return 0;
+            int VqtdeDisponivel = 0;
+            foreach(Exemplar aux in exemplares)
+            {
+                if (aux.disponivel())
+                {
+                    VqtdeDisponivel++;
+                }
+            }
+            return VqtdeDisponivel;
         }
         public int qtdeEmprestimos()
         {
-            return 0;
+            int VqtdeEmprestimos = 0;
+            foreach (Exemplar aux in exemplares){
+                VqtdeEmprestimos += aux.qtdeEmprestimos();
+            }
+            return VqtdeEmprestimos;
+
         }
         public double percDisponibilidade()
         {
-            return 0;
+            return (qtdeDisponiveis() / qtdeEmprestimos())*100;
         }
         #endregion
 

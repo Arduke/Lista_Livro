@@ -89,6 +89,13 @@ namespace projLivrosLista
 
         #endregion
 
+        #region Sobreescritas
+        public override bool Equals(object obj)
+        {
+            Exemplar p = (Exemplar)obj;
+            return this.tombo.Equals(p.tombo);
+        }
+        #endregion
 
     }
 }
